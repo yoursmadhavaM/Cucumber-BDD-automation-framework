@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard - Local Test</title>
+  <style>
+    body { font-family: system-ui, sans-serif; max-width: 500px; margin: 60px auto; padding: 20px; }
+    h1 { margin-bottom: 8px; }
+    .user { color: #666; margin-bottom: 24px; }
+    a { color: #2563eb; }
+    #logoutBtn { display: inline-block; margin-top: 16px; padding: 10px 20px; background: #dc2626; color: white; text-decoration: none; border-radius: 6px; }
+    #logoutBtn:hover { background: #b91c1c; }
+  </style>
+</head>
+<body>
+  <h1>Dashboard</h1>
+  <p class="user">Logged in as: <span id="displayUser">Guest</span></p>
+  <p>You are logged in successfully. Automation uses <strong>local profiles only</strong>.</p>
+  <a href="login.html" id="logoutBtn">Sign out</a>
+  <script>
+    var params = new URLSearchParams(window.location.search);
+    var user = params.get('user') || 'Guest';
+    document.getElementById('displayUser').textContent = user;
+  </script>
+</body>
+</html>

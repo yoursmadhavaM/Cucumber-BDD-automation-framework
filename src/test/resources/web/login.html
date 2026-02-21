@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login - Local Test</title>
+  <style>
+    * { box-sizing: border-box; }
+    body { font-family: system-ui, sans-serif; max-width: 400px; margin: 60px auto; padding: 20px; }
+    h1 { margin-bottom: 24px; }
+    label { display: block; margin-bottom: 4px; font-weight: 500; }
+    input { width: 100%; padding: 10px; margin-bottom: 16px; border: 1px solid #ccc; border-radius: 6px; }
+    button { width: 100%; padding: 12px; background: #2563eb; color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 16px; }
+    button:hover { background: #1d4ed8; }
+    .link { margin-top: 16px; text-align: center; }
+    .link a { color: #2563eb; }
+    #message { margin-top: 12px; padding: 10px; border-radius: 6px; display: none; }
+    #message.success { background: #dcfce7; color: #166534; display: block; }
+    #message.error { background: #fee2e2; color: #991b1b; display: block; }
+  </style>
+</head>
+<body>
+  <h1>Login</h1>
+  <form id="loginForm" action="dashboard.html" method="get">
+    <label for="username">Username</label>
+    <input type="text" id="username" name="username" required placeholder="Enter username">
+    <label for="password">Password</label>
+    <input type="password" id="password" name="password" required placeholder="Enter password">
+    <button type="submit" id="loginBtn">Login</button>
+  </form>
+  <div class="link">Don't have an account? <a href="signup.html" id="signupLink">Sign up</a></div>
+  <div id="message"></div>
+  <script>
+    document.getElementById('loginForm').onsubmit = function(e) {
+      e.preventDefault();
+      var msg = document.getElementById('message');
+      msg.className = '';
+      msg.style.display = 'block';
+      var u = document.getElementById('username').value;
+      var p = document.getElementById('password').value;
+      if (u && p) {
+        msg.textContent = 'Login successful. Redirecting...';
+        msg.className = 'success';
+        setTimeout(function() { window.location.href = 'dashboard.html?user=' + encodeURIComponent(u); }, 800);
+      } else {
+        msg.textContent = 'Please enter username and password.';
+        msg.className = 'error';
+      }
+    };
+  </script>
+</body>
+</html>

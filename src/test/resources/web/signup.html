@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign Up - Local Test</title>
+  <style>
+    * { box-sizing: border-box; }
+    body { font-family: system-ui, sans-serif; max-width: 400px; margin: 60px auto; padding: 20px; }
+    h1 { margin-bottom: 24px; }
+    label { display: block; margin-bottom: 4px; font-weight: 500; }
+    input { width: 100%; padding: 10px; margin-bottom: 16px; border: 1px solid #ccc; border-radius: 6px; }
+    button { width: 100%; padding: 12px; background: #059669; color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 16px; }
+    button:hover { background: #047857; }
+    .link { margin-top: 16px; text-align: center; }
+    .link a { color: #2563eb; }
+    #message { margin-top: 12px; padding: 10px; border-radius: 6px; display: none; }
+    #message.success { background: #dcfce7; color: #166534; display: block; }
+    #message.error { background: #fee2e2; color: #991b1b; display: block; }
+  </style>
+</head>
+<body>
+  <h1>Create account</h1>
+  <form id="signupForm">
+    <label for="signup-username">Username</label>
+    <input type="text" id="signup-username" name="username" required placeholder="Choose username">
+    <label for="signup-email">Email</label>
+    <input type="email" id="signup-email" name="email" required placeholder="your@email.com">
+    <label for="signup-password">Password</label>
+    <input type="password" id="signup-password" name="password" required placeholder="Choose password">
+    <label for="signup-confirm">Confirm password</label>
+    <input type="password" id="signup-confirm" name="confirm" required placeholder="Confirm password">
+    <button type="submit" id="signupBtn">Create account</button>
+  </form>
+  <div class="link">Already have an account? <a href="login.html" id="loginLink">Login</a></div>
+  <div id="message"></div>
+  <script>
+    document.getElementById('signupForm').onsubmit = function(e) {
+      e.preventDefault();
+      var msg = document.getElementById('message');
+      msg.className = '';
+      msg.style.display = 'block';
+      var p1 = document.getElementById('signup-password').value;
+      var p2 = document.getElementById('signup-confirm').value;
+      if (p1 !== p2) {
+        msg.textContent = 'Passwords do not match.';
+        msg.className = 'error';
+        return;
+      }
+      msg.textContent = 'Account created. Redirecting to login...';
+      msg.className = 'success';
+      setTimeout(function() { window.location.href = 'login.html'; }, 1000);
+    };
+  </script>
+</body>
+</html>
