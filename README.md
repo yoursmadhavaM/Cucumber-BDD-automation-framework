@@ -96,6 +96,18 @@ Edit this file to add or change test users. Do not commit real passwords.
    - Cucumber reports: `target/cucumber-reports/`
    - Allure: `target/site/allure-maven-plugin/` (open `index.html` or run `mvn jetty:run` and open `http://localhost:8080`).
 
+5. **View TestNG reports**
+   - `test-output/index.html`
+   - `target/surefire-reports/`
+
+---
+
+## Troubleshooting
+
+- **Browser not launching**: Ensure Firefox or Chrome is installed, or run with `-Dbrowser=CHROME|FIREFOX|EDGE`.
+- **Local pages not found**: Verify the HTML files exist under `src/test/resources/web/`.
+- **WebDriver issues**: If drivers fail to download, clear cached drivers and re-run the tests.
+
 ---
 
 ## Feature scenarios (current)
