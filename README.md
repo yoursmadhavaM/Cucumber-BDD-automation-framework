@@ -1,159 +1,119 @@
-<h1># Cucumber-BDD-Automation-Framework</h1>
-<h2>Behavior Driven Development Cucumber - Selenium based automation framework including Allure reports</h2>
+# Cucumber BDD Automation Framework
 
-<h2>This framework contains sample code containing:</h2>
-	<ul><li>1 feature (feature file)</li></ul>
-	<ul><li>2 Scenarios</li>
-	<li>Simple scenario login scenario and adding products to carts</li>
-	<li>Advance scenario where parameterization has been used (Scenario Outline examples) to search different types of products and listing out them</li></ul>
-	  
-<h2>Directory structure:</h2>
-<br>
-<img src="https://github.com/rohinegi548/Cucumber-BDD-Automation-Framework/blob/master/images/directoryStructure.PNG" title = "directory structure"/>
+A **Behavior Driven Development (BDD)** automation framework using **Cucumber**, **Selenium**, and **TestNG**, with **local login/signup** flows and **local profiles only**—no external sites or credentials.
 
-<br>
+---
 
-<h2>Prerequisites</h2>
-	<ul>
-	<li><b>Google Chrome</b> or <b>Mozilla Firefox</b> must be installed for UI tests to run. The framework uses WebDriverManager to download the correct driver automatically.</li>
-	<li>To use Firefox instead of Chrome: <code>mvn clean test -Dbrowser=FIREFOX</code></li>
-	<li>Java 8+ (Java 9+ requires the JAXB dependencies already added in pom.xml)</li>
-	</ul>
+## Features
 
-<h2>Steps to run at your system:</h2>
-	<ul>
-	<li>Clone the repository using "git clone <repository url>"</li>
-	<li>Change "Username" and "Password" in both scenarios in feature file</li>
-	<li>Run "mvn clean test" (default browser: Chrome; use -Dbrowser=FIREFOX if you have Firefox only)</li>
-	<li>Run "mvn site"</li>
-	</ul>
-	
-<h2>Cucumber Reports: net.masterthought - This will generate two reports</h2>
-	<ul>
-	<li>Cucumber Pretty (folder - "target\cucumber-reports\cucumber-pretty"), file - "index.html"</li>
-	<li>Cucumber Advance (folder - "target\cucumber-reports\advanced-reports\cucumber-html-reports"), file - "overview-features.html"	</li>
-	</ul>
-	<br>
-<h2>Folders for these reports:</h2>
-<br>
-<img src = "https://github.com/rohinegi548/Cucumber-BDD-Automation-Framework/blob/master/images/cucumber-pretty-advanced.PNG" title = "cucumber pretty and advanced"/>
-<br>
+- **Local login and signup** – Tests run against built-in HTML pages (no Amazon or external URLs).
+- **Local profiles only** – Credentials are read from `src/test/resources/local-profiles.properties` when automation starts.
+- **Cucumber (Gherkin)** – Feature files and scenario outlines.
+- **Selenium WebDriver** – Chrome, Firefox, or Edge via WebDriverManager (drivers auto-downloaded).
+- **TestNG** – Test execution and suite configuration.
+- **Reports** – Cucumber pretty/advanced reports and Allure (optional).
 
-<h2>Snapshots - Cucumber - Pretty - Report: See here </h2>
-<br>
-<ul>
-<li><a href = "https://github.com/rohinegi548/Cucumber-BDD-Automation-Framework/blob/master/images/cucumber-pretty1.PNG" title = "cucumber pretty and advanced">Cucumber-pretty summarized</a></li>
-<li><a href = "https://github.com/rohinegi548/Cucumber-BDD-Automation-Framework/blob/master/images/cucucmber-pretty.pdf" title = "cucumber pretty and advanced">Cucumber-pretty expanded</a></li>
-</ul>
+---
 
-<h2>Snapshots - Cucumber - Advanced - Report: See here </h2>
-<br>
-<ul>
-<li><a href = "https://github.com/rohinegi548/Cucumber-BDD-Automation-Framework/blob/master/images/cucumber-advanced2.PNG" title = "cucumber pretty and advanced">Cucumber-advance summarized</a></li>
-<li><a href = "https://github.com/rohinegi548/Cucumber-BDD-Automation-Framework/blob/master/images/cucumber-advance.pdf" title = "cucumber pretty and advanced">Cucumber-advance expanded</a></li>
-</ul>
+## Project structure
 
-<br>
-	
-<h2>See configuration in "pom.xml" file</h2>
+```
+Cucumber-BDD-Automation-Framework-master/
+├── pom.xml
+├── testNg.xml
+├── log4j.properties
+├── src/
+│   ├── main/java/com/cucumberFramework/
+│   │   ├── enums/           # Browsers, OS
+│   │   ├── helper/          # WaitHelper, LoggerHelper, LocalProfileHelper
+│   │   ├── pageObjects/     # LocalAuthPage, LoginLogoutPage
+│   │   ├── stepdefinitions/ # LocalAuthStepDefinitions, ServiceHooks
+│   │   ├── testBase/        # TestBase (WebDriver setup)
+│   │   └── testRunner/      # TestRunner (Cucumber + TestNG)
+│   └── test/resources/
+│       ├── features/login/  # login_logout.feature
+│       ├── web/             # login.html, signup.html, dashboard.html (local UI)
+│       ├── local-profiles.properties  # Test credentials (local only)
+│       └── drivers/         # Optional; WebDriverManager can replace
+├── target/                  # Build and reports (generated, gitignored)
+└── README.md
+```
 
-	<plugin>
-	<groupId>net.masterthought</groupId>
-	<artifactId>maven-cucumber-reporting</artifactId>
-	<version>3.8.0</version>
-	<executions>
-		<execution>
-			<id>execution</id>
-			<phase>verify</phase>
-			<goals>
-				<goal>generate</goal>
-			</goals>
-			<configuration>
-				<projectName>MyProjectName</projectName>
-				<!-- Replace with project name -->
-				<outputDirectory>target/cucumber-reports/advanced-reports</outputDirectory>
-				<cucumberOutput>target/cucumber-reports/CucumberTestReport.json</cucumberOutput>
-				<buildNumber>1</buildNumber>
-				<parallelTesting>false</parallelTesting>
-				<enableFlashCharts>false</enableFlashCharts>
-				<skippedFails>true</skippedFails>
-			</configuration>
-		</execution>
-	</executions>
-	</plugin>
+---
 
-				
-				
-				
-<h2>Allure Report:</h2> Allure reports will be generated based on the testcases json files when you'll run "mvn site". 
-<h3>Add this Allure dependency in pom.xml:</h3>
+## Prerequisites
 
-	<dependency>
-		<groupId>ru.yandex.qatools.allure</groupId>
-		<artifactId>allure-cucumber-jvm-adaptor</artifactId>
-		<version>1.6.2</version>
-	</dependency>
+- **Java 8+** (Java 9+ supported; JAXB and module opens are configured in `pom.xml`).
+- **Mozilla Firefox** (default) or **Google Chrome** – at least one must be installed for UI tests.
+- **Maven 3.x**.
 
-	
-<h3>Add this under Maven Surefire plugin:</h3>
+---
 
-	<argLine>
-		javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"                     -Dcucumber.options="--plugin ru.yandex.qatools.allure.cucumberjvm.AllureReporter"
-	</argLine
+## Local profiles (credentials)
 
-	
-<h3>And this under "project xml" tag</h3>	
+All test users are defined in **one place**. Automation uses only this file—no hardcoded credentials in feature files.
 
-	<reporting>
-		<excludeDefaults>true</excludeDefaults>
-		<plugins>
-			<plugin>
-				<groupId>ru.yandex.qatools.allure</groupId>
-				<artifactId>allure-maven-plugin</artifactId>
-				<version>2.5</version>
-			</plugin>
-		</plugins>
-	</reporting>
-	
-<br><br>
-<h3>You will be able to locate the report in folder : "target\site\allure-maven-plugin", the "Index.html" file. </h3>
+**File:** `src/test/resources/local-profiles.properties`
 
-<br>
-<img src = "https://github.com/rohinegi548/Cucumber-BDD-Automation-Framework/blob/master/images/allure-report.PNG" title = "allure report folder"/>
-<br><br><br>
-<h3>You can either open it through Firefox or on a local server. I had used "Jetty server", using this command: "mvn jetty:run". And then open url in your any browser "http://localhost:8080" and there you go.</h3>
+```properties
+# Default login profile
+default.username=testuser
+default.password=testpass123
 
-<b>MVN Jetty configuration is to be done in pom.xml if want to use it:</b>
+# Signup profile (create account)
+signup.username=newuser
+signup.email=newuser@test.local
+signup.password=newpass123
+```
 
-	<!--Needed only to show reports locally. Run jetty:run and open localhost:8080 to show the report -->
-	<plugin>
-		<groupId>org.eclipse.jetty</groupId>
-		<artifactId>jetty-maven-plugin</artifactId>
-		<version>9.2.10.v20150310</version>
-		<configuration>
-			<webAppSourceDirectory>${project.build.directory}/site/allure-maven-plugin</webAppSourceDirectory>
-			<stopKey>stop</stopKey>
-			<stopPort>1234</stopPort>
-		</configuration>
-	</plugin>
+Edit this file to add or change test users. Do not commit real passwords.
 
-<h2>Example snapshot of Allure report: </h2>
+---
 
-<ul><b>
-<li>allure-xunit view<br><br>
-<img src = "https://github.com/rohinegi548/Cucumber-BDD-Automation-Framework/blob/master/images/allure-xunit.PNG" title = "allure-xunit view"/></li><br><br>
-<li>allure-xunit1 view<br><br>
-<img src = "https://github.com/rohinegi548/Cucumber-BDD-Automation-Framework/blob/master/images/allure-xunit1.PNG" title = "allure-xunit1 view"/></li><br><br>
-<li>allure-xunit2 view<br><br>
-<img src = "https://github.com/rohinegi548/Cucumber-BDD-Automation-Framework/blob/master/images/allure-xunit2.PNG" title = "allure-xunit2 view"/></li><br><br>
-<li>allure-behavior1 view<br><br>
-<img src = "https://github.com/rohinegi548/Cucumber-BDD-Automation-Framework/blob/master/images/behavior1.PNG" title = "allure-behavior1 view"/></li><br><br>
-<li>allure-behavior2 view<br><br>
-<img src = "https://github.com/rohinegi548/Cucumber-BDD-Automation-Framework/blob/master/images/behavior2.PNG" title = "allure-behavior2 view"/></li><br><br>
-<li>allure-graph view<br><br>
-<img src = "https://github.com/rohinegi548/Cucumber-BDD-Automation-Framework/blob/master/images/allure-graph.png" title = "allure-graph view"/></li><br><br>
-</b></ul>
+## How to run
 
-<h3>Added a sample Execution Video and Generated Reports, See here: 
-<a width="400px" height="200px" href="https://github.com/rohinegi548/Cucumber-BDD-Automation-Framework/blob/master/Execution%20Demo.mp4">Herexecution Video and Generated Reports</a></h3>
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/yoursmadhavaM/Cucumber-BDD-automation-framework.git
+   cd Cucumber-BDD-automation-framework
+   ```
 
+2. **Run tests (default: Firefox)**
+   ```bash
+   mvn clean test
+   ```
+
+3. **Use Chrome instead**
+   ```bash
+   mvn clean test -Dbrowser=CHROME
+   ```
+
+4. **Generate Cucumber and Allure reports**
+   ```bash
+   mvn clean verify
+   mvn site
+   ```
+   - Cucumber reports: `target/cucumber-reports/`
+   - Allure: `target/site/allure-maven-plugin/` (open `index.html` or run `mvn jetty:run` and open `http://localhost:8080`).
+
+---
+
+## Feature scenarios (current)
+
+- **Login with local profile** – Open local login page → login with default profile → dashboard → sign out.
+- **Create account (signup)** – Open login → go to signup → create account with signup profile → redirected to login.
+- **Login with examples** – Login using usernames/passwords from the Examples table (e.g. `testuser` / `testpass123`, `newuser` / `newpass123`).
+
+---
+
+## Configuration
+
+- **Browser:** Set in `ServiceHooks` or via `-Dbrowser=CHROME|FIREFOX|EDGE`.
+- **Test suite:** `testNg.xml` (references `TestRunner`).
+- **Cucumber options:** In `pom.xml` (Surefire `argLine`) and in `TestRunner` (`@CucumberOptions`).
+
+---
+
+## License
+
+Use and modify as needed for your projects.
