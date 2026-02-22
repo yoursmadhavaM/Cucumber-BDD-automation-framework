@@ -1,0 +1,44 @@
+# Maven
+target/
+test-output/
+pom.xml.tag
+pom.releaseBackup
+pom.next
+release.properties
+dependency-reduced-pom.xml
+buildNumber.properties
+.mvn/timing.properties
+.mvn/wrapper/maven-wrapper.jar
+
+# IDE
+.idea/
+*.iml
+*.ipr
+*.iws
+.project
+.classpath
+.settings/
+.vscode/
+*.swp
+*.swo
+*~
+
+# Java
+*.class
+*.log
+*.jar
+*.war
+*.ear
+*.zip
+hs_err_pid*
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Unwanted / generated
+automation.out
+*.mp4
+
+# Local profiles (optional: uncomment to avoid committing real credentials)
+# src/test/resources/local-profiles.properties
