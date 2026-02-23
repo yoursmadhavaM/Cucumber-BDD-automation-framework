@@ -25,9 +25,9 @@ Cucumber-BDD-Automation-Framework-master/
 ├── src/
 │   ├── main/java/com/cucumberFramework/
 │   │   ├── enums/           # Browsers, OS
-│   │   ├── helper/          # WaitHelper, LoggerHelper, LocalProfileHelper
+│   │   ├── helper/          # WaitHelper, LoggerHelper, LocalProfileHelper, Constants
 │   │   ├── pageObjects/     # LocalAuthPage, LoginLogoutPage
-│   │   ├── stepdefinitions/ # LocalAuthStepDefinitions, ServiceHooks
+│   │   ├── stepdefinitions/ # LocalAuthStepDefinitions, loginLogoutPageStepDefinitions, ServiceHooks
 │   │   ├── testBase/        # TestBase (WebDriver setup)
 │   │   └── testRunner/      # TestRunner (Cucumber + TestNG)
 │   └── test/resources/
